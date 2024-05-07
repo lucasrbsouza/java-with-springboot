@@ -1,6 +1,7 @@
 package com.javawithsprinbootlucas.javawithspringboot.controller;
 
 import com.javawithsprinbootlucas.javawithspringboot.data.vo.v1.PersonVO;
+import com.javawithsprinbootlucas.javawithspringboot.data.vo.v2.PersonVOV2;
 import com.javawithsprinbootlucas.javawithspringboot.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,7 +19,6 @@ public class PersonController {
     private PersonServices service;
 
 
-
     @GetMapping(value= "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public PersonVO findById (@PathVariable(value = "id")Long id)throws Exception {
 
@@ -34,6 +34,11 @@ public class PersonController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public PersonVO create (@RequestBody PersonVO person){
         return service.create(person);
+    }
+
+    @PostMapping(value = "/v2", produces = MediaType.APPLICATION_JSON_VALUE)
+    public PersonVOV2 createV2 (@RequestBody PersonVOV2 person){
+        return service.createV2(person);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
